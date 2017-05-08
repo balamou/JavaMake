@@ -5,7 +5,6 @@ Description:
 How to use Compile:
 
   - Copy the compile.sh file into your java directory
-  - Create a folder named 'compiled'
   - To compile and run your java code type this in the terminal:
 
         $ sh compile.sh <YourJavaClass>
