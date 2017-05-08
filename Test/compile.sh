@@ -12,19 +12,12 @@ START="${RED}-----COMPILING-----${RESET}"
 RUN="${RED}-----RUNNING-----${RESET}"
 END="${RED}-----ENDED-----${RESET}"
 
-function simple_run
-{
-	javac $1.java -d compiled
-	java -cp compiled $1
-}
-
 function run
 {
-	if [ ! -d compiled ]; then
-  	mkdir -p compiled;
-	fi
+	folder="class"
+	createfolder $folder
 
-	javac $1.java -d compiled 2> error.txt # compiled the file named $1.java into the directory compiled/$1.class
+	javac $1.java -d $folder 2> error.txt # compiled the file named $1.java into the directory compiled/$1.class
  	size=$(wc -c <"error.txt") # size of the error file
 	value=$(<"error.txt")
 	str="Note: Recompile with -Xlint:unchecked for details."
@@ -34,9 +27,9 @@ function run
  		# NO ERRORS
  		echo "${BLUE}0 errors${RESET}"
  	 	echo $RUN
-		java -cp compiled $1 | tee log.txt # runs class $1 from the compiled directory, and saved output into log.txt at the same time
+		java -cp $folder $1 # runs class $1 from the compiled directory, and saved output into log.txt at the same time
  	else
-		# ERRORS
+ 		# ERRORS
 		if [[ $value == *"$str"* ]] # if the error file contains the string str
 		then
 			GREEN="$(tput setaf 35)"
@@ -55,8 +48,25 @@ function run
 	if [[ $value == *"$str"* ]]
 	then
 		# SOME ERRORS
+		echo "You forgot to put the generic type of a variable (i.e Stack<String> T, instead of Stack T)"
  	 	echo $RUN
-		java -cp compiled $1 | tee log.txt # runs class $1 from the compiled directory, and saved output into log.txt at the same time
+		java -cp $folder $1 # runs class $1 from the compiled directory, and saved output into log.txt at the same time
+	fi
+
+	removefile "error.txt"
+}
+
+function removefile
+{
+	if [ -f $1 ] ; then
+    rm $1
+	fi
+}
+
+function createfolder
+{
+	if [ ! -d $1 ]; then
+  	mkdir -p $1
 	fi
 }
 

@@ -24,7 +24,6 @@ How to use Compile:
           This is a test
           -----ENDED-----
 
-          * Running this will generate .class files in the compiled folder.
-          * The script will generate an error.txt file with all the errors and a
-          log.txt file with the output of the java program (you can delete those
-          files and the script will still be able to run)
+          * Running this will generate .class files in the 'class' folder.
+          * The script will generate an error.txt file and automatically delete
+          it after its use.
