@@ -9,7 +9,7 @@ How to use Compile:
 
         $ sh compile.sh <YourJavaClass>
 
-    Make sure you put the name of your class without the .java extension.
+    The .java extension is optional
 
   - If you type this:
 
