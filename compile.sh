@@ -1,6 +1,7 @@
 #!/bin/bash
 # compiles and runs the Java code
 # @author Michel Balamou (michelbalamou@gmail.com)
+# export PS1="\\[\e[91m\]\W \$ \\[\e[0m\]"; clear;
 
 BLUE="$(tput setaf 32)"
 RED="$(tput setaf 1)"
@@ -81,8 +82,23 @@ function createfolder
 	fi
 }
 
+function install
+{
+	file="/usr/local/bin/compile"
+	rm $file
+
+	sudo ln -s $PWD/compile.sh /usr/local/bin/compile
+	chmod +x compile.sh
+}
+
 clear
-echo $JAVA
-echo $START
-run "${@}"
-echo $END
+if [[ $1 == "--install" ]]
+then
+	install
+	echo "Compile command successfully installed"
+else
+	echo $JAVA
+	echo $START
+	run "${@}"
+	echo $END
+fi

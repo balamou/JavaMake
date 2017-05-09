@@ -1,19 +1,24 @@
 Description:
   This bash script allow you to both compile and run using only one command.
-  The errors are displayed in a different colour.
+  The errors are displayed in a different color.
 
 How to use Compile:
 
-  - Copy the compile.sh file into your java directory
-  - To compile and run your java code type this in the terminal:
+  - Download the bash file, open the terminal and type:
 
-        $ sh compile.sh <YourJavaClass>
+        $ sh compile.sh --install
 
-    The .java extension is optional
+  - Switch to your directory using 'cd' and type this to compile and run the Java
+    program:
+
+        $ compile <YourJavaClass>
+        $ compile <YourJavaClass> Param1 Param2 Param3
+
+        * The .java extension is optional
 
   - If you type this:
 
-          $ sh compile.sh Test
+          $ compile Test
 
         this will be the output:
 
