@@ -21,6 +21,8 @@ function run()
 	classname=$1
 	isWarning=false
 	offset=2
+	folder="class"
+	warning="Note: Recompile with -Xlint:unchecked for details."
 
 	# Removes the .java extension from the first argument
 	if [[ $1 == *".java"* ]]; then # if the first parameter has java in it
@@ -35,7 +37,7 @@ function run()
 		echo "${classname}" > .tmp_data
 	else
 		echo -e "${YELLOW}\c"
-		if [ ! -z $1 ]; then
+		if [ ! -z "$1" ]; then
 			echo "The file ${classname}.java doesn't exist"
 		fi
 
@@ -46,15 +48,11 @@ function run()
 	fi
 
 	#++++++++++++++++++++
-	folder="class"
-	warning="Note: Recompile with -Xlint:unchecked for details."
-
 	createfolder $folder
 
 	compile_text="$(javac $classname.java -d $folder 2>&1)" # compiles the file named $1.java into the directory class/$1.class
-	length=${#compile_text}
 
- 	if [ "$length" -eq "0" ]; then # there is no errors
+ 	if [ -z "$compile_text" ]; then # there is no errors
  		# NO ERRORS
  		echo "${BLUE}0 errors${RESET}"
  	 	echo $RUN
@@ -121,6 +119,7 @@ case $1 in
 	# CLEAR ~~~~~~~~~~~~~~~~~~~~~~~
   "--clear")
 		rm -r "class"
+		rm ".tmp_data"
 		;;
 
 	# OTHERWISE ~~~~~~~~~~~~~~~~~~
@@ -128,7 +127,7 @@ case $1 in
 		# removes the class folder and runs the code
 		if [[ $2 == "--reset" ]]; then
 			rm -r "class"
-			rm -r ".tmp_data"
+			rm ".tmp_data"
 		fi
 
 		echo $JAVA
