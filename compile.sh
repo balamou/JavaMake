@@ -4,10 +4,11 @@
 # export PS1="\\[\e[91m\]\W \$ \\[\e[0m\]"; clear;
 
 # Formating tags
+RESET="$(tput sgr0)"
 BLUE="$(tput setaf 32)"
 RED="$(tput setaf 1)"
-RESET="$(tput sgr0)"
 GREEN="$(tput setaf 35)"
+YELLOW="$(tput setaf 5)"
 
 # Output variables
 JAVA="${RED}[Java]${RESET}"
@@ -17,13 +18,27 @@ END="${RED}-------ENDED-------${RESET}"
 
 function run()
 {
-	# Removes the .java extension from the first argument
 	classname=$1
 	isWarning=false
 
+	# Removes the .java extension from the first argument
 	if [[ $1 == *".java"* ]]; then # if the first parameter has java in it
 		len=$((${#1} - 5)) # length without the .java extension
 		classname=${1:0:$len} # substring without the .java extension
+	fi
+
+	# Check if the file name exists
+	# if it does, save it in a .tmp_data file
+	# if it doesn't, then load the name form the previous .tmp_data file
+	if [ -e "./${classname}.java" ]; then
+		echo "${classname}" > .tmp_data
+	else
+		echo -e "${YELLOW}\c"
+		if [ ! -z $1 ]; then
+			echo "The file ${classname}.java doesn't exist"
+		fi
+		classname=$(<".tmp_data")
+		echo "Running previous class ${classname}${RESET}"
 	fi
 
 	#++++++++++++++++++++
@@ -44,20 +59,20 @@ function run()
  		# ERRORS
 		if [[ $compile_text == *"$warning"* ]]; then # if the error file contains the string 'warning'
 			isWarning=true
-			echo "${GREEN}"
+			echo -e "${GREEN}\c"
 			echo "Warnings:"
 		else
- 			echo "${BLUE}\c"
+ 			echo -e "${BLUE}\c"
 		fi
 
-		echo "$compile_text"  # output the file otherwise
+		echo -e "${compile_text}\c"  # output the file otherwise
 		echo "${RESET}"
 	fi
 
 	# XLINT / GENERICS CAUSE THIS PROBLEM +++++++++++++++
 	if $isWarning; then
 		# SOME ERRORS
-		echo "You forgot to put the generic type of a variable\n(i.e you put Node next instead of Node<E> next)"
+		echo "You forgot to put the generic type of a variable (i.e you put Node next instead of Node<E> next)"
  	 	echo "${RUN}"
 		java -cp $folder $classname "${@:2}" # runs class $1 from the compiled directory
 	fi
@@ -93,23 +108,27 @@ function install()
 clear
 case $1 in
 
+  # INSTALL ~~~~~~~~~~~~~~~~~~~~~
 	"--install")
 		install
 		echo "Compile command successfully installed"
 		;;
 
+	# CLEAR ~~~~~~~~~~~~~~~~~~~~~~~
   "--clear")
 		rm -r "class"
 		;;
 
-	# removed the class folder and runs the code
+	# OTHERWISE ~~~~~~~~~~~~~~~~~~
 	*)
+		# removes the class folder and runs the code
 		if [[ $2 == "--reset" ]]; then
 			rm -r "class"
+			rm -r ".tmp_data"
 		fi
 
 		echo $JAVA
-		echo $START
+		echo "$START"
 		# send all the arguments to the run function. Quotes are needed so
 		# that parameters like these "hello world" are interpreted as one word.
 		run "${@}"
