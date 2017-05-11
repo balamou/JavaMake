@@ -20,6 +20,7 @@ function run()
 {
 	classname=$1
 	isWarning=false
+	offset=2
 
 	# Removes the .java extension from the first argument
 	if [[ $1 == *".java"* ]]; then # if the first parameter has java in it
@@ -37,6 +38,9 @@ function run()
 		if [ ! -z $1 ]; then
 			echo "The file ${classname}.java doesn't exist"
 		fi
+
+		offset=1
+
 		classname=$(<".tmp_data")
 		echo "Running previous class ${classname}${RESET}"
 	fi
@@ -54,7 +58,7 @@ function run()
  		# NO ERRORS
  		echo "${BLUE}0 errors${RESET}"
  	 	echo $RUN
-		java -cp $folder $classname "${@:2}" # runs class $classname from the 'class' folder
+		java -cp $folder $classname "${@:$offset}" # runs class $classname from the 'class' folder
  	else
  		# ERRORS
 		if [[ $compile_text == *"$warning"* ]]; then # if the error file contains the string 'warning'
@@ -72,9 +76,9 @@ function run()
 	# XLINT / GENERICS CAUSE THIS PROBLEM +++++++++++++++
 	if $isWarning; then
 		# SOME ERRORS
-		echo "You forgot to put the generic type of a variable (i.e you put Node next instead of Node<E> next)"
+		echo "${GREEN}You forgot to put the generic type of a variable (i.e you put Node next instead of Node<E> next)${RESET}"
  	 	echo "${RUN}"
-		java -cp $folder $classname "${@:2}" # runs class $1 from the compiled directory
+		java -cp $folder $classname "${@:$offset}" # runs class $1 from the compiled directory
 	fi
 }
 
