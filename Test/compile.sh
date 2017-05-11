@@ -61,7 +61,7 @@ function run
 	if $isWarning
 	then
 		# SOME ERRORS
-		echo "You forgot to put the generic type of a variable (i.e you put Stack T instead of Stack<String> T)"
+		echo "You forgot to put the generic type of a variable\n(i.e you put Node next instead of Node<E> next)"
  	 	echo "${RUN}"
 		java -cp $folder $classname "${@:2}" # runs class $1 from the compiled directory
 	fi

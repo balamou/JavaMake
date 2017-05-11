@@ -32,6 +32,14 @@
 
         * Running this will generate .class files in the 'class' folder.
 
+## Commands
+
+| Command | Function |
+|---------|----------|
+| --install | installs a global compile command|
+| --clear | removes the 'class' folder |
+| --reset | removed the 'class' folder and recompiles the java file |
+
 ## TODO
 
 - [X] Add a --clear command to clear all the files generates by the bash script
@@ -41,3 +49,4 @@
   with the .class files. Also one that changed the color of the errors and
   the color of the diplay tags (----RUN----)
 - [ ] Add a --help command
+- [ ] Allow the bash to save the name of the last compiled class
