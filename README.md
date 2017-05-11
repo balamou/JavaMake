@@ -36,7 +36,7 @@
 
 | Command | Function |
 |---------|----------|
-| --install | installs a global compile command|
+| --install | installs a global compile command |
 | --clear | removes the 'class' folder |
 | --reset | removed the 'class' folder and recompiles the java file |
 
