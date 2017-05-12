@@ -8,7 +8,7 @@ RESET="$(tput sgr0)"
 BLUE="$(tput setaf 32)"
 RED="$(tput setaf 1)"
 GREEN="$(tput setaf 35)"
-YELLOW="$(tput setaf 5)"
+YELLOW="$(tput setaf 11)"
 
 # Output variables
 JAVA="${RED}[Java]${RESET}"
@@ -41,10 +41,15 @@ function run()
 			echo "The file ${classname}.java doesn't exist"
 		fi
 
-		offset=1
+		if [ ! -e "./.tmp_data" ]; then # no tmp data file
+			read -p "Please specify a class name to compile: " classname
+			echo "${classname}" > .tmp_data
+		else
+			classname=$(<".tmp_data")
+			echo "Running previous class ${classname}${RESET}"
+		fi
 
-		classname=$(<".tmp_data")
-		echo "Running previous class ${classname}${RESET}"
+		offset=1
 	fi
 
 	#++++++++++++++++++++
