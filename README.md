@@ -4,9 +4,9 @@
 
 ## How to use Compile:
 
-  - Download the bash file, open the terminal and type:
+  - Open the terminal and type:
 
-        $ sh compile.sh --install
+        $ curl https://raw.githubusercontent.com/balamou/compiler/master/compile.sh | bash -s -- --install
 
   - Switch to your directory using 'cd' and type this to compile and run the Java
     program (**.java extension is optional**):
@@ -16,6 +16,12 @@
   - You can also compile it with parameters:
 
         $ compile <YourJavaClass> Param1 Param2 Param3
+
+  - Once you typed your class name once, the script will remember it:
+
+       $ compile Param1 Param2 Param3
+
+    will run your last compiled class with those arguments.
 
   - If you type this:
 
@@ -44,7 +50,7 @@
 
 - [X] Add a --clear command to clear all the files generates by the bash script
 - [X] Remove the need for generating an error.txt file
-- [ ] Allow users to install the bash file from command line
+- [X] Allow users to install the bash file from command line
 - [ ] Make a configuration file that stores all the info like the name of the folder
   with the .class files. Also one that changed the color of the errors and
   the color of the diplay tags (----RUN----)
