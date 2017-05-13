@@ -19,7 +19,7 @@
 
   - Once you typed your class name once, the script will remember it:
 
-       $ compile Param1 Param2 Param3
+        $ compile Param1 Param2 Param3
 
     will run your last compiled class with those arguments.
 

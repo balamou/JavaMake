@@ -112,7 +112,6 @@ function install()
 #  MAIN SCOPE  #
 ################
 
-clear
 case $1 in
 
   # INSTALL ~~~~~~~~~~~~~~~~~~~~~
@@ -123,16 +122,19 @@ case $1 in
 
 	# CLEAR ~~~~~~~~~~~~~~~~~~~~~~~
   "--clear")
-		rm -r "class"
-		rm ".tmp_data"
+		[ -f "class" ] && rm -r "class"
+		[ -e ".tmp_data" ] && rm ".tmp_data"
+		echo "Folder 'class' and the file .tmp_data have been removed"
 		;;
 
 	# OTHERWISE ~~~~~~~~~~~~~~~~~~
 	*)
+		clear
+
 		# removes the class folder and runs the code
 		if [[ $2 == "--reset" ]]; then
-			rm -r "class"
-			rm ".tmp_data"
+			[ -f "class" ] && rm -r "class"
+			[ -e ".tmp_data" ] && rm ".tmp_data"
 		fi
 
 		echo $JAVA
