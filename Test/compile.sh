@@ -24,11 +24,7 @@ function run()
 	folder="class"
 	warning="Note: Recompile with -Xlint:unchecked for details."
 
-	# Removes the .java extension from the first argument
-	if [[ $1 == *".java"* ]]; then # if the first parameter has java in it
-		len=$((${#1} - 5)) # length without the .java extension
-		classname=${1:0:$len} # substring without the .java extension
-	fi
+	classname="${1%.java}" # remove .java extension
 
 	# Check if the file name exists
 	# if it does, save it in a .tmp_data file
@@ -36,13 +32,17 @@ function run()
 	if [ -e "./${classname}.java" ]; then
 		echo "${classname}" > .tmp_data
 	else
-		echo -e "${YELLOW}\c"
 		if [ ! -z "$1" ]; then
-			echo "The file ${classname}.java doesn't exist"
+			echo "${YELLOW}The file ${classname}.java doesn't exist${RESET}"
 		fi
 
 		if [ ! -e "./.tmp_data" ]; then # no tmp data file
-			read -p "Please specify a class name to compile: " classname
+			until [ -f "$classname" ]; do
+				read -p "${YELLOW}Please specify a class name to compile:${RESET} " classname
+				classname="${classname%.java}" # remove .java extension
+				classname+=".java"
+			done
+			classname="${classname%.java}"
 			echo "${classname}" > .tmp_data
 		else
 			classname=$(<".tmp_data")
