@@ -10,10 +10,11 @@ function createfolder()
 createfolder "$HOME/compiler"
 (curl https://raw.githubusercontent.com/balamou/compiler/master/compile.sh) > "$HOME/compiler/compile.sh"
 file="/usr/local/bin/compile"
-rm $file
+rm $file 2> /dev/null
 
 sudo ln -s "$HOME/compiler/compile.sh" "/usr/local/bin/compile"
-chmod +x "$HOME/compiler/compile.sh" # make the bash script into an executable
+cd "$HOME/compiler/compile.sh"
+chmod +x compile.sh # make the bash script into an executable
 
 createfolder "$HOME/.config/compiler"
 
