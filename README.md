@@ -2,7 +2,7 @@
   This bash script allows you to both compile and run using only one command.
   The errors are displayed in a different colour.
 
-  <script type="text/javascript" src="https://asciinema.org/a/122139.js" id="asciicast-122139" async></script>
+  [![asciicast](https://asciinema.org/a/122139.png)](https://asciinema.org/a/122139)
 
 ## How to use Compile:
 
