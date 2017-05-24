@@ -48,11 +48,7 @@
 
 ## TODO
 
-- [X] Add a --clear command to clear all the files generates by the bash script
-- [X] Remove the need for generating an error.txt file
-- [X] Allow users to install the bash file from command line
 - [ ] Make a configuration file that stores all the info like the name of the folder
   with the .class files. Also one that changed the color of the errors and
   the color of the diplay tags (----RUN----)
 - [ ] Add a --help command
-- [X] Allow the bash to save the name of the last compiled class
