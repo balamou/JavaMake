@@ -7,8 +7,10 @@
 RESET="$(tput sgr0)"
 BLUE="$(tput setaf 32)"
 RED="$(tput setaf 1)"
-GREEN="$(tput setaf 35)"
-YELLOW="$(tput setaf 11)"
+GREEN="$(tput setaf 178)"
+GREY="$(tput setaf 234)"
+CYANE="$(tput setaf 26)"
+BRED="$(tput setaf 160)"
 
 # Output variables
 source "$HOME/.config/compiler/config"
@@ -30,20 +32,24 @@ function run()
 		echo "${classname}" > .tmp_data
 	else
 		if [ ! -z "$1" ]; then
-			echo "${YELLOW}The file ${classname}.java doesn't exist${RESET}"
+			echo "${GREY}The file ${RESET}${BRED}${classname}.java${RESET}${GREY} doesn't exist${RESET}"
 		fi
 
 		if [ ! -e "./.tmp_data" ]; then # no tmp data file
 			until [ -f "$classname" ]; do
-				read -p "${YELLOW}Please specify a class name to compile:${RESET} " classname
+				read -p "${GREY}Please specify a class name to compile:${RESET} " classname
 				classname="${classname%.java}" # remove .java extension
 				classname+=".java"
 			done
 			classname="${classname%.java}"
 			echo "${classname}" > .tmp_data
+			echo ""
+			echo ""
 		else
 			classname=$(<".tmp_data")
-			echo "Running previous class ${classname}${RESET}"
+			echo "${GREY}Running previous class${RESET} ${CYANE}${classname}${RESET}"
+			echo ""
+			echo ""
 		fi
 
 		offset=1
@@ -52,6 +58,8 @@ function run()
 	#++++++++++++++++++++
 	createfolder $folder
 
+	echo "$JAVA"
+	echo "$COMPILING"
 	compile_text="$(javac $classname.java -d $folder 2>&1)" # compiles the file named $1.java into the directory class/$1.class
 
  	if [ -z "$compile_text" ]; then # there is no errors
@@ -64,7 +72,6 @@ function run()
 		if [[ $compile_text == *"$warning"* ]]; then # if the error file contains the string 'warning'
 			isWarning=true
 			echo -e "${GREEN}\c"
-			echo "Warnings:"
 		else
  			echo -e "${BLUE}\c"
 		fi
@@ -119,7 +126,7 @@ case $1 in
 
 		# Save Default configurations into a config file
 		default='JAVA="${RED}[Java]${RESET}"\n'
-		default+='START="${RED}-----COMPILING-----${RESET}"\n'
+		default+='COMPILING="${RED}-----COMPILING-----${RESET}"\n'
 		default+='RUN="${RED}------RUNNING------${RESET}"\n'
 		default+='END="${RED}-------ENDED-------${RESET}"'
 		echo "$default" > "$HOME/.config/compiler/config"
@@ -142,8 +149,6 @@ case $1 in
 			[ -e ".tmp_data" ] && rm ".tmp_data"
 		fi
 
-		echo $JAVA
-		echo "$START"
 		# send all the arguments to the run function. Quotes are needed so
 		# that parameters like these "hello world" are interpreted as one word.
 		run "${@}"
