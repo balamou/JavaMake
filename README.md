@@ -1,8 +1,8 @@
 # Description:
   This bash script allows you to both compile and run using only one command.
-  The errors are displayed in a different colour.
+  The errors are displayed in a different colors.
 
-  [![asciicast](https://asciinema.org/a/122139.png)](https://asciinema.org/a/122139)
+  [![asciicast](https://asciinema.org/a/122148.png)](https://asciinema.org/a/122148)
 
 ## How to use Compile:
 
