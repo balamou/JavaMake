@@ -13,14 +13,14 @@ createfolder "$HOME/compiler"
 link="/usr/local/bin/compile"
 rm $link 2> /dev/null
 
-(curl https://raw.githubusercontent.com/balamou/compiler/master/compile.sh) > "$HOME/compiler/compile.sh"
+(curl -s https://raw.githubusercontent.com/balamou/compiler/master/compile.sh) > "$HOME/compiler/compile.sh"
+echo "compile.sh successfully loaded"
+(curl -s https://raw.githubusercontent.com/balamou/compiler/master/config) > "$HOME/compiler/config"
+echo "config successfully loaded"
+echo "Creating symlink..."
 
 sudo ln -s "$HOME/compiler/compile.sh" "$link"
 cd "$HOME/compiler/"
 chmod +x compile.sh # make the bash script into an executable
 
-# Save Default configurations into a config file
-(curl https://raw.githubusercontent.com/balamou/compiler/master/config) > "$HOME/compiler/config"
-
-echo ""
 echo "${CYANE}Compile command successfully installed!${RESET}"
