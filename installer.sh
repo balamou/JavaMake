@@ -13,7 +13,7 @@ file="/usr/local/bin/compile"
 rm $file 2> /dev/null
 
 sudo ln -s "$HOME/compiler/compile.sh" "/usr/local/bin/compile"
-cd "$HOME/compiler/compile.sh"
+cd "$HOME/compiler/"
 chmod +x compile.sh # make the bash script into an executable
 
 createfolder "$HOME/.config/compiler"
