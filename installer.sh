@@ -6,18 +6,21 @@ function createfolder()
   	mkdir -p $1
 	fi
 }
+CYANE="$(tput setaf 26)"
+RESET="$(tput sgr0)"
 
 createfolder "$HOME/compiler"
-(curl https://raw.githubusercontent.com/balamou/compiler/master/compile.sh) > "$HOME/compiler/compile.sh"
-file="/usr/local/bin/compile"
-rm $file 2> /dev/null
+link="/usr/local/bin/compile"
+rm $link 2> /dev/null
 
-sudo ln -s "$HOME/compiler/compile.sh" "/usr/local/bin/compile"
+(curl https://raw.githubusercontent.com/balamou/compiler/master/compile.sh) > "$HOME/compiler/compile.sh"
+
+sudo ln -s "$HOME/compiler/compile.sh" "$link"
 cd "$HOME/compiler/"
 chmod +x compile.sh # make the bash script into an executable
 
 # Save Default configurations into a config file
-createfolder "$HOME/.config/compiler"
-(curl https://raw.githubusercontent.com/balamou/compiler/master/config) > "$HOME/.config/compiler/config"
+(curl https://raw.githubusercontent.com/balamou/compiler/master/config) > "$HOME/compiler/config"
 
-echo "Compile command successfully installed"
+echo ""
+echo "${CYANE}Compile command successfully installed!${RESET}"

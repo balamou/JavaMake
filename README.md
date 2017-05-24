@@ -8,7 +8,7 @@
 
   - Open the terminal and type:
 
-        $ curl https://raw.githubusercontent.com/balamou/compiler/master/installer.sh | bash
+        $ curl -s https://raw.githubusercontent.com/balamou/compiler/master/installer.sh | bash
 
   - Switch to your directory using 'cd' and type this to compile and run the Java
     program (**.java extension is optional**):
@@ -44,8 +44,8 @@
 
 | Command | Function |
 |---------|----------|
+| --uninstall | removes the soft link from /usr/local/bin and deletes the $HOME/compiler folder |
 | --clear | removes the 'class' folder |
-| --reset | removed the 'class' folder and recompiles the java file |
 
 ## TODO
 

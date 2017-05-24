@@ -13,7 +13,7 @@ CYANE="$(tput setaf 26)"
 BRED="$(tput setaf 160)"
 
 # Output variables
-source "$HOME/.config/compiler/config"
+source "$HOME/compiler/config"
 
 function run()
 {
@@ -108,7 +108,6 @@ function createfolder()
 case $1 in
 
 	"--uninstall")
-		rm -r "$HOME/.config/compiler/"
 		rm "/usr/local/bin/compile"
  		rm -r "$HOME/compiler/"
 	;;
@@ -122,16 +121,9 @@ case $1 in
 
 	# OTHERWISE ~~~~~~~~~~~~~~~~~~
 	*)
-		clear
-
-		# removes the class folder and runs the code
-		if [[ $2 == "--reset" ]]; then
-			[ -f "class" ] && rm -r "class"
-			[ -e ".tmp_data" ] && rm ".tmp_data"
-		fi
-
 		# send all the arguments to the run function. Quotes are needed so
 		# that parameters like these "hello world" are interpreted as one word.
+		clear
 		run "${@}"
 		echo $END
 		;;
