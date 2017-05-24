@@ -107,9 +107,15 @@ function createfolder()
 
 case $1 in
 
+	"--uninstall")
+		rm -r "$HOME/.config/compiler/"
+		rm "/usr/local/bin/compile"
+ 		rm -r "$HOME/compiler/"
+	;;
+
 	# CLEAR ~~~~~~~~~~~~~~~~~~~~~~~
   "--clear")
-		[ -f "class" ] && rm -r "class"
+		rm -r "class" 2> /dev/null
 		[ -e ".tmp_data" ] && rm ".tmp_data"
 		echo "Folder 'class' and the file .tmp_data have been removed"
 		;;
