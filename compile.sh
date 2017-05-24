@@ -44,11 +44,9 @@ function run()
 			classname="${classname%.java}"
 			echo "${classname}" > .tmp_data
 			echo ""
-			echo ""
 		else
 			classname=$(<".tmp_data")
 			echo "${GREY}Running previous class${RESET} ${CYANE}${classname}${RESET}"
-			echo ""
 			echo ""
 		fi
 
@@ -103,34 +101,11 @@ function createfolder()
 	fi
 }
 
-function install()
-{
-	file="/usr/local/bin/compile"
-	rm $file
-
-	sudo ln -s "$PWD/compile.sh" "/usr/local/bin/compile"
-	chmod +x compile.sh # make the bash script into an executable
-}
-
 ################
 #  MAIN SCOPE  #
 ################
 
 case $1 in
-
-  # INSTALL ~~~~~~~~~~~~~~~~~~~~~
-	"--install")
-		install
-		echo "Compile command successfully installed"
-		createfolder "$HOME/.config/compiler"
-
-		# Save Default configurations into a config file
-		default='JAVA="${RED}[Java]${RESET}"\n'
-		default+='COMPILING="${RED}-----COMPILING-----${RESET}"\n'
-		default+='RUN="${RED}------RUNNING------${RESET}"\n'
-		default+='END="${RED}-------ENDED-------${RESET}"'
-		echo "$default" > "$HOME/.config/compiler/config"
-		;;
 
 	# CLEAR ~~~~~~~~~~~~~~~~~~~~~~~
   "--clear")

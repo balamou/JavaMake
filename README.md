@@ -6,7 +6,7 @@
 
   - Open the terminal and type:
 
-        $ curl https://raw.githubusercontent.com/balamou/compiler/master/compile.sh | bash -s -- --install
+        $ curl https://raw.githubusercontent.com/balamou/compiler/master/installer.sh | bash
 
   - Switch to your directory using 'cd' and type this to compile and run the Java
     program (**.java extension is optional**):
@@ -42,7 +42,6 @@
 
 | Command | Function |
 |---------|----------|
-| --install | installs a global compile command |
 | --clear | removes the 'class' folder |
 | --reset | removed the 'class' folder and recompiles the java file |
 
