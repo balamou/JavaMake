@@ -1,0 +1,4 @@
+JAVA="${RED}[Java]${RESET}"
+COMPILING="${RED}-----COMPILING-----${RESET}"
+RUN="${RED}------RUNNING------${RESET}"
+END="${RED}-------ENDED-------${RESET}"

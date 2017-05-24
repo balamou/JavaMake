@@ -16,13 +16,8 @@ sudo ln -s "$HOME/compiler/compile.sh" "/usr/local/bin/compile"
 cd "$HOME/compiler/"
 chmod +x compile.sh # make the bash script into an executable
 
-createfolder "$HOME/.config/compiler"
-
 # Save Default configurations into a config file
-default='JAVA="${RED}[Java]${RESET}"\n'
-default+='COMPILING="${RED}-----COMPILING-----${RESET}"\n'
-default+='RUN="${RED}------RUNNING------${RESET}"\n'
-default+='END="${RED}-------ENDED-------${RESET}"'
-echo "$default" > "$HOME/.config/compiler/config"
+createfolder "$HOME/.config/compiler"
+(curl https://raw.githubusercontent.com/balamou/compiler/master/config) > "$HOME/.config/compiler/config"
 
 echo "Compile command successfully installed"
