@@ -1,6 +1,6 @@
 # Description:
   This bash script allows you to both compile and run using only one command.
-  The errors are displayed in a different color.
+  The errors are displayed in a different colour.
 
 ## How to use Compile:
 
@@ -49,6 +49,6 @@
 ## TODO
 
 - [ ] Make a configuration file that stores all the info like the name of the folder
-  with the .class files. Also one that changed the color of the errors and
-  the color of the diplay tags (----RUN----)
+  with the .class files. Also one that changed the colour of the errors and
+  the colour of the display tags (----RUN----)
 - [ ] Add a --help command

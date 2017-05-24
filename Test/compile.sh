@@ -11,10 +11,7 @@ GREEN="$(tput setaf 35)"
 YELLOW="$(tput setaf 11)"
 
 # Output variables
-JAVA="${RED}[Java]${RESET}"
-START="${RED}-----COMPILING-----${RESET}"
-RUN="${RED}------RUNNING------${RESET}"
-END="${RED}-------ENDED-------${RESET}"
+source "$HOME/.config/compiler/config"
 
 function run()
 {
@@ -104,7 +101,7 @@ function install()
 	file="/usr/local/bin/compile"
 	rm $file
 
-	sudo ln -s $PWD/compile.sh /usr/local/bin/compile
+	sudo ln -s "$PWD/compile.sh" "/usr/local/bin/compile"
 	chmod +x compile.sh # make the bash script into an executable
 }
 
@@ -118,6 +115,14 @@ case $1 in
 	"--install")
 		install
 		echo "Compile command successfully installed"
+		createfolder "$HOME/.config/compiler"
+
+		# Default
+		default='JAVA="${RED}[Java]${RESET}"\n'
+		default+='START="${RED}-----COMPILING-----${RESET}"\n'
+		default+='RUN="${RED}------RUNNING------${RESET}"\n'
+		default+='END="${RED}-------ENDED-------${RESET}"'
+		echo "$default" > "$HOME/.config/compiler/config"
 		;;
 
 	# CLEAR ~~~~~~~~~~~~~~~~~~~~~~~
