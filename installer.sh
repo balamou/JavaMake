@@ -14,9 +14,9 @@ link="/usr/local/bin/compile"
 rm $link 2> /dev/null
 
 (curl -s https://raw.githubusercontent.com/balamou/compiler/master/compile.sh) > "$HOME/compiler/compile.sh"
-echo "compile.sh successfully loaded"
+echo "$HOME/compiler/compile.sh successfully loaded"
 (curl -s https://raw.githubusercontent.com/balamou/compiler/master/config) > "$HOME/compiler/config"
-echo "config successfully loaded"
+echo "$HOME/compiler/config successfully loaded"
 echo "Creating symlink..."
 
 sudo ln -s "$HOME/compiler/compile.sh" "$link"

@@ -49,7 +49,7 @@
 
 ## TODO
 
-- [ ] Make a configuration file that stores all the info like the name of the folder
+- [X] Make a configuration file that stores all the info like the name of the folder
   with the .class files. Also one that changed the colour of the errors and
   the colour of the display tags (----RUN----)
 - [ ] Add a --help command
