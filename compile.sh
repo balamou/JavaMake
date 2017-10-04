@@ -58,13 +58,22 @@ function run()
 
 	echo "$JAVA"
 	echo "$COMPILING"
-	compile_text="$(javac $classname.java -d $folder 2>&1)" # compiles the file named $1.java into the directory class/$1.class
+
+	# check if other dependencies are specified
+	if [ -e "./.dependencies" ]; then
+		dep=$(<".dependencies")
+		compile_text="$(javac -classpath $dep $classname.java -d $folder 2>&1)" # compiles the file named $1.java into the directory class/$1.class
+	else
+		compile_text="$(javac $classname.java -d $folder 2>&1)" # compiles the file named $1.java into the directory class/$1.class
+	fi
 
  	if [ -z "$compile_text" ]; then # there is no errors
  		# NO ERRORS
  		echo "${BLUE}0 errors${RESET}"
  	 	echo $RUN
-		java -cp $folder $classname "${@:$offset}" # runs class $classname from the 'class' folder
+		# ${classname##*/} removes everything up to the last /, so that we can extract the classname without
+		# the directory it is stored in, as we will be runnning it from another folder
+		java -cp $folder "${classname##*/}" "${@:$offset}" # runs class $classname from the 'class' folder
  	else
  		# ERRORS
 		if [[ $compile_text == *"$warning"* ]]; then # if the error file contains the string 'warning'
@@ -83,7 +92,9 @@ function run()
 		# SOME ERRORS
 		echo "${GREEN}You forgot to put the generic type of a variable (i.e you put Node next instead of Node<E> next)${RESET}"
  	 	echo "${RUN}"
-		java -cp $folder $classname "${@:$offset}" # runs class $1 from the compiled directory
+		# ${classname##*/} removes everything up to the last /, so that we can extract the classname without
+		# the directory it is stored in, as we will be runnning it from another folder
+		java -cp $folder "${classname##*/}" "${@:$offset}" # runs class $1 from the compiled directory
 	fi
 }
 
